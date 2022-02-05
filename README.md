@@ -9,7 +9,7 @@ This repository has been tested on Ubuntu 16.04. We strongly recommend you to ha
 
 - pytorch  2.4.1
 
-- tensorflow-gpu 1.9 [optional]
+- tensorflow-gpu 1.9
 
 - seaborn 0.11.2
 
