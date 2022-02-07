@@ -70,7 +70,7 @@ ipython
 
 ## Utility files
 
-| File name | Discription |
+| File name | Description |
 | :-------: | :--------: |
 | layer.py | Neural network definition of different model |
 | utils.py | Utility functions |
