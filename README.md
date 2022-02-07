@@ -3,7 +3,7 @@
 DeepRCI is a deep learning framework for RNA-Chromatin Interactions through integrating Multi-Genomics Data. This is an instruction of predicting RNA-Chromatin Interactions using DeepRCI.
 
 ![Overview](figure1.jpg)
-* Illustration of biologial mechanism is created with [Biorender](Biorender.com)
+* The illustration of the underlying biologial mechanism is created with [Biorender](https://www.biorender.com)
 # Dependencies
 This repository has been tested on Ubuntu 16.04. We strongly recommend you to have [Anaconda3](https://www.anaconda.com/distribution/) installed, which contains most of required packages for running this model.
 
