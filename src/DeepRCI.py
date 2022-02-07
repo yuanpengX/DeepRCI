@@ -72,8 +72,8 @@ hidden_dim = args.hidden_dim
 kernel_size = args.kernel_size
 dataset = args.dataset
 train_name = f'new_train.data'
-valid_name = f'new_valid.data'
-test_name = f'new_test.data'
+valid_name = f'new_valid_hit.data' # remove data with cd-hit
+test_name = f'new_test_hit.data' # remove redundant with cd-hit
 seed = args.seed
 np.random.seed(seed)
 random.seed(seed)
