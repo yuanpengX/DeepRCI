@@ -14,3 +14,10 @@ DeepRCI requires three types of data:
 ipython
 %run data_generation.ipynb
 ```
+
+## remove redudant
+```
+python data2fa.py
+bash cd-hit-est.sh
+python fa2data.py
+```
