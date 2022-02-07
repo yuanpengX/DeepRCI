@@ -232,7 +232,7 @@ model.compile(
 model.summary()
 
 checkpoint = tf.keras.callbacks.ModelCheckpoint(
-    f'../checkpoint/bayesian/{exp}_best.hdf5',
+    f'../checkpoint/{exp}_best.hdf5',
     monitor="val_loss",
     verbose=0,
     save_best_only=True,
