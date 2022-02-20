@@ -20,6 +20,15 @@ gene2pos = {}
 
 for line in open(annotation):
     line = line.strip().split()
+    '''
+    if line[1] == 'HAVANA' and line[2]== 'gene':
+        # get id
+        annot = line[-1].split(';')[0].split('=')[1].split('.')[0]
+        start = line[3]
+        end = line[4]
+        strand = line[6]
+        gene2pos[annot] = (int(start),int(end),strand)
+    '''
     if line[0] == chrs:
         flag = True
         if line[1] == 'HAVANA' and line[2]== 'gene':
@@ -71,7 +80,7 @@ exp_intra_gene2inter = pkl.load(open('result/exp_intra_gene2inter.bin','rb'))
 
 marker_genes = ['TMSB4X','ISG15','UBE2S','H2AFZ','CKS1B','TUBA1B','PTTG1','HMGB2','IFI27','FTH1','CCL2','HLA-B',
                'LTB','CXCL8','LTB','IFI27','SERPINE1','RPS2','PGF','TMSB4X','PTMA','SOX18']
-highly_genes = pkl.load(open('result/highly_genes.bin','rb'))
+
 
 #marker_genes 转换成ENSMBL_ID
 # 先获取genename2idx
@@ -105,7 +114,6 @@ for gene in marker_genes:
 
 allgenes = list(gene2pos.keys())
 np.random.shuffle(allgenes)
-#sampled = allgenes[:7]
 
 random_data = []
 count = 0
@@ -113,7 +121,6 @@ for ids in allgenes:
     if ids in normal_inner_gene2inter and ids in exp_inner_gene2inter:
         if ids in normal_intra_gene2inter and ids in exp_intra_gene2inter:
             count +=1
-            #random_data.append((normal_inner_gene2inter[ids],exp_inner_gene2inter[ids]))
             a = normal_inner_gene2inter[ids]/(normal_inner_gene2inter[ids]+normal_intra_gene2inter[ids])
             b = exp_inner_gene2inter[ids]/(exp_inner_gene2inter[ids]+exp_intra_gene2inter[ids])
             random_data.append((a,b))
@@ -123,39 +130,64 @@ for ids in allgenes:
 random_data = np.array(random_data)
 data = np.array(data)
 
-dic = {'':[],'interaction ratio':[],'type':[]}
-
+dic = {'dif':[],'interaction ratio':[],"":[]}
+resid  = []
 for d in data:
-    dic[''].append('highly differentiated')
+    dic['dif'].append('highly differentiated')
     dic['interaction ratio'].append(d[0])
-    dic['type'].append('normal cell')
+    dic[''].append('normal cell')
 
-
-    dic[''].append('highly differentiated')
+    dic['dif'].append('highly differentiated')
     dic['interaction ratio'].append(d[1])
-    dic['type'].append('abnormal cell')
+    dic[''].append('abnormal cell')
+
 
 
 for d in random_data:
-    dic[''].append('nonhighly differentiated')
+    dic['dif'].append('non-highly differentiated')
     dic['interaction ratio'].append(d[0])
-    dic['type'].append('normal cell')
+    dic[''].append('normal cell')
 
-
-    dic[''].append('nonhighly differentiated')
+    dic['dif'].append('non-highly differentiated')
     dic['interaction ratio'].append(d[1])
-    dic['type'].append('abnormal cell')
+    dic[''].append('abnormal cell')
 
 
 import pandas as pd
 df = pd.DataFrame(dic)
 
-ax = sns.boxplot(x="type", y="interaction ratio", hue="",
+sns.boxplot(hue='', x="dif", y="interaction ratio",
                  data=df, palette="Set3")
 
 plt.legend(loc='upper right')
+plt.xlabel("")
 plt.xticks(fontsize=13)
 plt.yticks(fontsize=13)
 plt.ylabel('interaction ratio',fontsize=13)
 plt.savefig('result/gene_expression_ratio.png')
 plt.savefig('result/gene_expression_ratio.pdf')
+
+# rank sum test
+
+from scipy.stats import wilcoxon, ranksums, ttest_ind
+high = df[df['dif']=='highly differentiated']
+high_normal_cell = high[high['']=='normal cell']
+high_abnormal_cell = high[high['']=='abnormal cell']
+print(ranksums(high_normal_cell['interaction ratio'], high_abnormal_cell['interaction ratio']))
+#print(wilcoxon(high_normal_cell['interaction ratio'], high_abnormal_cell['interaction ratio']))
+
+
+
+low = df[df['dif']=='non-highly differentiated']
+low_normal_cell = low[high['']=='normal cell']
+low_abnormal_cell = low[high['']=='abnormal cell']
+print(ranksums(low_normal_cell['interaction ratio'], low_abnormal_cell['interaction ratio']))
+#print(wilcoxon(low_normal_cell['interaction ratio'], low_abnormal_cell['interaction ratio']))
+
+
+print(np.mean(high_normal_cell['interaction ratio'])- np.mean(low_normal_cell['interaction ratio']))
+print(np.mean(high_abnormal_cell['interaction ratio'])- np.mean(low_abnormal_cell['interaction ratio']))
+
+
+print(ranksums(high_normal_cell['interaction ratio'], low_normal_cell['interaction ratio']))
+print(ranksums(high_abnormal_cell['interaction ratio'], low_abnormal_cell['interaction ratio']))
