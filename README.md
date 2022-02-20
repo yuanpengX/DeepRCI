@@ -58,7 +58,7 @@ python DeepCRI.py --experiment bayesian --model bayesian --mode train --dataset 
     - Download gene annotation data from [Gencode](http://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_38/gencode.v38.chr_patch_hapl_scaff.annotation.gff3.gz), and unzip it to  `tutorial/figure`.
     - Download RNA seq data from GEO database with accession number [GSM4006843](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM4006843)
 
-## Generate result in the paper
+## Reproduce figures in the paper
 
 ```bash
 cd tutorial/figure/data
