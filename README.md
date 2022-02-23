@@ -3,9 +3,9 @@
 DeepRCI is a deep learning framework for RNA-Chromatin Interactions through integrating Multi-Genomics Data. This is an instruction of predicting RNA-Chromatin Interactions using DeepRCI.
 # Overview of DeepRCI
 ![Overview](figure1.jpg)
-* The illustration of the underlying biologial mechanism is created with [Biorender](https://www.biorender.com)
+* The illustration of the underlying biological mechanism is created with [Biorender](https://www.biorender.com)
 # Dependencies
-This repository has been tested on Ubuntu 16.04. We strongly recommend you to have [Anaconda3](https://www.anaconda.com/distribution/) installed, which contains most of required packages for running this model.
+This repository has been tested on Ubuntu 16.04. We strongly recommend you to have [Anaconda3](https://www.anaconda.com/distribution/) installed, which contains most of the required packages for running this model.
 
 ### Must installed packages or softwares
 
@@ -32,9 +32,9 @@ This repository has been tested on Ubuntu 16.04. We strongly recommend you to ha
 - --seed: experiment seed for reproducibility
 - --kernel_size: convolutional kernel size
 - --dataset: directory to your dataset
-- --hidden_dim: dimension for hiddent units
+- --hidden_dim: dimension for hidden units
 
-## Test with pretrained model
+## Test with pre-trained model
 
 ```bash
 cd src
@@ -51,7 +51,7 @@ python DeepCRI.py --experiment bayesian --model bayesian --mode train --dataset 
 
 - Download RNA-chromatin interaction pairs from GEO database with accession number [GSM4006840](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM4006840), and move it to `iMARGI/data/`
 - Download reference genome from [ENCODE](https://www.encodeproject.org/files/GRCh38_no_alt_analysis_set_GCA_000001405.15/@@download/GRCh38_no_alt_analysis_set_GCA_000001405.15.fasta.gz), and move it to `ref/`
-- Download HiC data and ATAC-seq data from GEO database with accession number [GSM4006837](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM4006837) and [GSM4006837](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM4006837), and move it to `tutorial/figure/data`
+- Download HiC data and ATAC-seq data from GEO database with accession numbers [GSM4006837](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM4006837) and [GSM4006837](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM4006837), and move it to `tutorial/figure/data`
 
 - Optional [for tutorial figure]
 
