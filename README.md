@@ -88,7 +88,6 @@ The column names of these tables are described at http://meme-suite.org/doc/tomt
 
 | File name | Description |
 | :-------: | :--------: |
-| layer.py | Neural network definition of different model |
 | utils.py | Utility functions |
 | const.py | Constants used in our model |
 | layers.py | neural network definition of different model |
